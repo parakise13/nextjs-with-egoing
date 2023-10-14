@@ -18,7 +18,12 @@ export default async function RootLayout({ children }) {
     //         setTopics(result);
     //     });
     // }, []);
-    const resp = await fetch("http://localhost:9999/topics");
+
+    // npx json-server --port 9999 --watch db.json
+    // 상기의 명령어로 json-server를 실행 => db.json 파일이 생성되고 수정도 가능 => 거기서 데이터를 받아옴
+    const resp = await fetch("http://localhost:9999/topics", {
+        cache: "no-store",
+    });
     const topics = await resp.json();
 
     return (
