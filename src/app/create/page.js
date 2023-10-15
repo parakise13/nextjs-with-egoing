@@ -22,12 +22,12 @@ export default function Create() {
                     body: JSON.stringify({ title, body }),
                 };
 
-                fetch(`http://localhost:9999/topics`, options)
+                // client component에서 환경변수 사용
+                fetch(`${process.env.NEXT_PUBLIC_API_URL}/topics`, options)
                     .then((res) => res.json())
                     .then((result) => {
-                        console.log("result : ", result);
                         const lastid = result.id;
-                        console.log("lastid : ", lastid);
+                        router.refresh();
                         router.push(`/read/${lastid}`);
                     });
             }}
